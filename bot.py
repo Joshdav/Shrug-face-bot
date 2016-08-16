@@ -2,6 +2,7 @@
 import praw
 import OAuth2Util
 import time
+import re
 
 UA = "Shrug fixer by /u/AtomicEleven"
 r = praw.Reddit(UA)
@@ -41,7 +42,7 @@ def run_bot():
 def shrug(c):
 	text = c.body
 	tokens = text.split()
-	if "¯\_(ツ)_/¯" in tokens:
+	if re.match(".*¯\_(ツ)_/¯.*", tokens):
 		return True
 
 if __name__ == '__main__':
