@@ -42,9 +42,8 @@ def run_bot():
 def shrug(c):
 	text = c.body
 	tokens = text.split()
-	for t in tokens:
-		if re.search('.*¯\_(ツ)_/¯.*', t):
-			return True
+	if "¯\_(ツ)_/¯" in tokens:
+		return True
 
 if __name__ == '__main__':
 	while True:
