@@ -31,7 +31,7 @@ Edit: The reason you only need an escape character for the first underscore and 
 
 def run_bot(): 
 	cache = [reply]
-	sub = r.get_subreddit("all")
+	sub = r.get_subreddit('all')
 	comments = sub.get_comments(limit = 100)
 	for c in comments:
 		if shrug(c) and c.id not in cache and c not in cache:
@@ -42,8 +42,9 @@ def run_bot():
 def shrug(c):
 	text = c.body
 	tokens = text.split()
-	if re.match(".*¯\_(ツ)_/¯.*", tokens):
-		return True
+	for t in tokens:
+		if re.search('.*¯\_(ツ)_/¯.*', t):
+			return True
 
 if __name__ == '__main__':
 	while True:
