@@ -2,7 +2,6 @@
 import praw
 import OAuth2Util
 import time
-import re
 
 UA = "Shrug fixer by /u/AtomicEleven"
 r = praw.Reddit(UA)
@@ -47,6 +46,10 @@ def shrug(c):
 
 if __name__ == '__main__':
 	while True:
-		run_bot()
-		time.sleep(30)
-		o.refresh()
+		try:
+			run_bot()
+			time.sleep(30)
+			o.refresh()
+		except (praw.errors.HTTPException, ConnectionError, praw.errors.Forbidden, ConnectionResetError) as e:
+			time.sleep(30)
+			o.refresh()
