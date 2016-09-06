@@ -36,7 +36,7 @@ def run_bot():
 		if shrug(c) and c.id not in cache and c not in cache:
 			c.reply(reply)
 			cache.append(c.id)
-			time.sleep(600)
+			#time.sleep(600)
 
 def shrug(c):
 	text = c.body
@@ -50,6 +50,6 @@ if __name__ == '__main__':
 			run_bot()
 			time.sleep(30)
 			o.refresh()
-		except (praw.errors.HTTPException, ConnectionError, praw.errors.Forbidden, ConnectionResetError) as e:
+		except (praw.errors.HTTPException, ConnectionError, praw.errors.Forbidden, ConnectionResetError, praw.errors.InvalidComment) as e:
 			time.sleep(30)
 			o.refresh()
