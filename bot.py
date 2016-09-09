@@ -28,6 +28,7 @@ The reason for this is that the underscore character (this one \\_ ) is used to 
 
 Edit: The reason you only need an escape character for the first underscore and not the second is because the second underscore (which doesn't have an escape character) doesn't have another underscore with which to italicize.  Reddit's formatting works in that you need a special character to indicate how you want to format text, then you put the text you want to format, then you put the character again.  For example, you would type \_italicize\_ or \*italicize\* in order to get _italicize_.  Since we put an escape character we have \\\\\_italicize\_ and don't need to escape the second underscore since there's not another non-escaped underscore with which to italicize something in between them.  So technically you could have written ¯\\\\\\\\\\\\\\_(ツ)\\\\\_/¯ but you don't need to since there's not a second non-escaped underscore.  You ***would*** need to escape the second underscore if you planned on using another underscore in the same line (but not if you used a line break, aka pressed enter twice).  If you used an asterisk later though on the same line it would not work with the non-escaped underscore to italicize.  To show you this, you can type _italicize* and it should not be italicized."""
 
+#Main function which divides the comments and finds one to reply to
 def run_bot(): 
 	cache = [reply]
 	sub = r.get_subreddit('all')
@@ -36,8 +37,8 @@ def run_bot():
 		if shrug(c) and c.id not in cache and c not in cache:
 			c.reply(reply)
 			cache.append(c.id)
-			#time.sleep(600)
 
+#Decides if the bot should reply based on each word in the comment
 def shrug(c):
 	text = c.body
 	tokens = text.split()
@@ -49,7 +50,7 @@ if __name__ == '__main__':
 		try:
 			run_bot()
 			time.sleep(30)
-			o.refresh()
+			o.refresh(force=True)
 		except (praw.errors.HTTPException, ConnectionError, praw.errors.Forbidden, ConnectionResetError, praw.errors.InvalidComment) as e:
 			time.sleep(30)
-			o.refresh()
+			o.refresh(force=True)
